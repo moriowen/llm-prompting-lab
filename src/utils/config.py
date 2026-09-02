@@ -29,6 +29,7 @@ TOP_P = 1.0
 TOP_K = 40
 REPEAT_PENALTY = 1.1
 NUM_CTX = 2048
+NUM_THREAD = 4
 
 # CoT needs room to externalise the work. A harness necessity, not a variable -- it is
 # reported as a stated deviation so the arms are otherwise identical. Keyed by
@@ -38,6 +39,10 @@ NUM_CTX = 2048
 NUM_PREDICT = {
     ("task1", "zeroshot"): 128, ("task1", "fewshot"): 128, ("task1", "cot"): 640,
     ("task2", "zeroshot"): 128, ("task2", "fewshot"): 128, ("task2", "cot"): 1536,
+    # The verbose arms differ only in prompt wording, so they inherit the budget of
+    # the arm they are a variant of; changing it would confound wording with length.
+    ("task1", "fewshot_verbose"): 128, ("task1", "cot_verbose"): 640,
+    ("task2", "fewshot_verbose"): 128, ("task2", "cot_verbose"): 1536,
 }
 
 REQUEST_TIMEOUT = 600
@@ -61,6 +66,7 @@ def options(temperature: float, seed: int, task: str, arm: str) -> dict:
         "top_k": TOP_K,
         "repeat_penalty": REPEAT_PENALTY,
         "num_ctx": NUM_CTX,
+        "num_thread": NUM_THREAD,
         "num_predict": NUM_PREDICT[(task, arm)],
     }
 
@@ -70,6 +76,7 @@ def frozen() -> dict:
     return {
         "seed": SEED, "fewshot_seed": FEWSHOT_SEED, "top_p": TOP_P, "top_k": TOP_K,
         "repeat_penalty": REPEAT_PENALTY, "num_ctx": NUM_CTX,
+        "num_thread": NUM_THREAD,
         "num_predict": {f"{k[0]}.{k[1]}": v for k, v in NUM_PREDICT.items()},
         "n_shots": N_SHOTS,
         "temp_grid": TEMP_GRID, "inflection_curve": INFLECTION_CURVE,

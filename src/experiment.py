@@ -20,7 +20,7 @@ def run_cell(model_alias: str, task: str, arm: str, temp: float, k: int,
     """One (model, task, arm, temperature) cell: every query x every seed."""
     entry = MODEL_REGISTRY[model_alias]
     items = load_queries(task, ladder)
-    pool = generate.load("fewshot_pool") if arm == "fewshot" else None
+    pool = generate.load("fewshot_pool") if arm.startswith("fewshot") else None
 
     tr = trace.Trace(model_alias, task, arm, temp, resume=resume,
                      ollama_tag=entry["ollama_tag"], digest=entry.get("digest"),

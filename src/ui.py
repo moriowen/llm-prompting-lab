@@ -133,7 +133,7 @@ const uniq = (f) => [...new Set(D.trials.map(f))];
 const temps = uniq(t => t.T).sort((a, b) => a - b);
 const shownTemps = rows => [...new Set(rows.map(t => t.T))].sort((a, b) => a - b);
 const KEY = 'hw1-ui-state';
-// Live mode reloads the whole page, so filters and the selected cell are kept here.
+// Keep filters and the selected cell when the user reloads to fetch fresh data.
 // Anything no longer present in the data is dropped rather than restored blindly.
 function save() {
   try { sessionStorage.setItem(KEY, JSON.stringify(
@@ -314,20 +314,11 @@ render();
 </script></body></html>"""
 
 
-RELOAD = ("<script>setTimeout(() => location.reload(), %d000);</script>"
-          "<div style='position:fixed;right:.7rem;bottom:.7rem;font-size:11px;color:var(--muted);"
-          "background:var(--head);border:1px solid var(--line);border-radius:99px;"
-          "padding:.2rem .6rem'>live · refreshing every %ds</div>")
-
-
-def render(live_seconds: int = 0) -> str:
+def render() -> str:
     """The page as a string, with the current runs embedded."""
     # </script> inside a raw response would close the data block early.
     payload = json.dumps(collect(), separators=(",", ":")).replace("</", "<\\/")
-    page = PAGE.replace("__DATA__", payload)
-    if live_seconds:
-        page = page.replace("</body>", RELOAD % (live_seconds, live_seconds) + "</body>")
-    return page
+    return PAGE.replace("__DATA__", payload)
 
 
 def build(out_path="ui.html") -> Path:
@@ -337,13 +328,13 @@ def build(out_path="ui.html") -> Path:
     return path
 
 
-def serve(port: int = 8765, every: int = 20) -> None:
+def serve(port: int = 8765) -> None:
     """Serve the explorer, rebuilding from runs/ on every request."""
     from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
     class Handler(BaseHTTPRequestHandler):
         def do_GET(self):
-            body = render(live_seconds=every).encode()
+            body = render().encode()
             self.send_response(200)
             self.send_header("Content-Type", "text/html; charset=utf-8")
             self.send_header("Content-Length", str(len(body)))
@@ -353,8 +344,8 @@ def serve(port: int = 8765, every: int = 20) -> None:
             self.wfile.write(body)
 
         def log_message(self, *a):
-            pass  # one line per auto-refresh would bury the run output
+            pass
 
-    print(f"serving http://localhost:{port} — rebuilds from runs/ on every request, "
-          f"page refreshes every {every}s (ctrl-c to stop)")
+    print(f"serving http://localhost:{port} — reload the page to refresh data "
+          "(ctrl-c to stop)")
     ThreadingHTTPServer(("127.0.0.1", port), Handler).serve_forever()

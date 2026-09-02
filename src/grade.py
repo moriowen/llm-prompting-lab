@@ -12,8 +12,8 @@ DECIMAL_COMMA = re.compile(r"[-+]?\d+,\d+")
 
 
 def extract(raw: str, arm: str) -> tuple[str, bool]:
-    """(answer, extraction_ok). Only the CoT arm needs the answer pulled out of prose."""
-    if arm != "cot":
+    """(answer, extraction_ok). Only the CoT arms need the answer pulled out of prose."""
+    if arm not in ("cot", "cot_verbose"):
         return raw.strip(), True
     hits = [m.group(1).strip() for m in FINAL.finditer(raw) if m.group(1).strip()]
     # A CoT response with no FINAL: marker is an invalid trial, not a wrong answer.

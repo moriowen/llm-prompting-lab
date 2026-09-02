@@ -141,7 +141,7 @@ def cmd_ui(args):
     """Build the run explorer, or serve it live while a run is going."""
     from src import ui as ui_mod
     if args.serve:
-        ui_mod.serve(args.port, args.every)
+        ui_mod.serve(args.port)
         return
     path = ui_mod.build(args.out)
     print(f"wrote {path} -- open it in a browser (no server needed); "
@@ -199,7 +199,6 @@ def main(argv=None):
     ui.add_argument("--out", default="ui.html")
     ui.add_argument("--serve", action="store_true", help="live mode: reread runs/ on every request")
     ui.add_argument("--port", type=int, default=8765)
-    ui.add_argument("--every", type=int, default=20, help="page refresh interval, seconds")
     ui.set_defaults(fn=cmd_ui)
 
     rp = sub.add_parser("report", help="build the HTML report")

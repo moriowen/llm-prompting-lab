@@ -65,7 +65,7 @@ LADDER = ("qwen2.5-1.5b", "gemma3-4b", "mistral-7b")
 OLLAMA_HOST = "http://localhost:11434"
 
 TASKS = ("task1", "task2")
-ARMS = ("zeroshot", "fewshot", "cot")
+ARMS = ("zeroshot", "fewshot", "cot", "fewshot_verbose", "cot_verbose")
 
 TASK_NAMES = {
     "task1": "Character-By-Character Reversal",
