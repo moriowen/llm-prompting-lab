@@ -2,3 +2,7 @@ __pycache__/
 *.pyc
 tmp/
 report.html
+
+# instructor course material, not mine to redistribute
+2026-ProgrammingAssignment-1.pdf
+H1-assignment-transcript.md
