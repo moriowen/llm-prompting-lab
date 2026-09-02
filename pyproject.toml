@@ -1,0 +1,10 @@
+[project]
+name = "bds-hw1"
+version = "0.1.0"
+description = "Character reversal and decimal division on three self-hosted LLMs, swept across temperature"
+readme = "README.md"
+requires-python = ">=3.12"
+# Deliberately zero dependencies. Every model is reached over localhost HTTP with
+# urllib, and every gold answer comes from decimal/fractions in the standard library.
+# Nothing here should need a network install to reproduce.
+dependencies = []

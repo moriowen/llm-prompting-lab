@@ -1,0 +1,516 @@
+{
+  "task1": [
+    {
+      "qid": "Q1",
+      "s": "DPo",
+      "l": 3,
+      "gold": "oPD",
+      "case_pattern": "UUl",
+      "n_upper": 2,
+      "distinct_chars": 3
+    },
+    {
+      "qid": "Q2",
+      "s": "dsV",
+      "l": 3,
+      "gold": "Vsd",
+      "case_pattern": "llU",
+      "n_upper": 1,
+      "distinct_chars": 3
+    },
+    {
+      "qid": "Q3",
+      "s": "Kdj",
+      "l": 3,
+      "gold": "jdK",
+      "case_pattern": "Ull",
+      "n_upper": 1,
+      "distinct_chars": 3
+    },
+    {
+      "qid": "Q4",
+      "s": "OXu",
+      "l": 3,
+      "gold": "uXO",
+      "case_pattern": "UUl",
+      "n_upper": 2,
+      "distinct_chars": 3
+    },
+    {
+      "qid": "Q5",
+      "s": "khZ",
+      "l": 3,
+      "gold": "Zhk",
+      "case_pattern": "llU",
+      "n_upper": 1,
+      "distinct_chars": 3
+    },
+    {
+      "qid": "Q6",
+      "s": "yRtPX",
+      "l": 5,
+      "gold": "XPtRy",
+      "case_pattern": "lUlUU",
+      "n_upper": 3,
+      "distinct_chars": 5
+    },
+    {
+      "qid": "Q7",
+      "s": "LhhXx",
+      "l": 5,
+      "gold": "xXhhL",
+      "case_pattern": "UllUl",
+      "n_upper": 2,
+      "distinct_chars": 4
+    },
+    {
+      "qid": "Q8",
+      "s": "JBTyc",
+      "l": 5,
+      "gold": "cyTBJ",
+      "case_pattern": "UUUll",
+      "n_upper": 3,
+      "distinct_chars": 5
+    },
+    {
+      "qid": "Q9",
+      "s": "lCyDP",
+      "l": 5,
+      "gold": "PDyCl",
+      "case_pattern": "lUlUU",
+      "n_upper": 3,
+      "distinct_chars": 5
+    },
+    {
+      "qid": "Q10",
+      "s": "icMWU",
+      "l": 5,
+      "gold": "UWMci",
+      "case_pattern": "llUUU",
+      "n_upper": 3,
+      "distinct_chars": 5
+    },
+    {
+      "qid": "Q11",
+      "s": "wBBBGzqS",
+      "l": 8,
+      "gold": "SqzGBBBw",
+      "case_pattern": "lUUUUllU",
+      "n_upper": 5,
+      "distinct_chars": 6
+    },
+    {
+      "qid": "Q12",
+      "s": "HkwaZMWP",
+      "l": 8,
+      "gold": "PWMZawkH",
+      "case_pattern": "UlllUUUU",
+      "n_upper": 5,
+      "distinct_chars": 8
+    },
+    {
+      "qid": "Q13",
+      "s": "OVcHNFkj",
+      "l": 8,
+      "gold": "jkFNHcVO",
+      "case_pattern": "UUlUUUll",
+      "n_upper": 5,
+      "distinct_chars": 8
+    },
+    {
+      "qid": "Q14",
+      "s": "yCNtjJbT",
+      "l": 8,
+      "gold": "TbJjtNCy",
+      "case_pattern": "lUUllUlU",
+      "n_upper": 4,
+      "distinct_chars": 8
+    },
+    {
+      "qid": "Q15",
+      "s": "UgimFtjT",
+      "l": 8,
+      "gold": "TjtFmigU",
+      "case_pattern": "UlllUllU",
+      "n_upper": 3,
+      "distinct_chars": 8
+    },
+    {
+      "qid": "Q16",
+      "s": "XKcPOucbxVaq",
+      "l": 12,
+      "gold": "qaVxbcuOPcKX",
+      "case_pattern": "UUlUUllllUll",
+      "n_upper": 5,
+      "distinct_chars": 11
+    },
+    {
+      "qid": "Q17",
+      "s": "cwDXYBHhfslG",
+      "l": 12,
+      "gold": "GlsfhHBYXDwc",
+      "case_pattern": "llUUUUUllllU",
+      "n_upper": 6,
+      "distinct_chars": 12
+    },
+    {
+      "qid": "Q18",
+      "s": "TuthfFjgrMDX",
+      "l": 12,
+      "gold": "XDMrgjFfhtuT",
+      "case_pattern": "UllllUlllUUU",
+      "n_upper": 5,
+      "distinct_chars": 12
+    },
+    {
+      "qid": "Q19",
+      "s": "KjHDdODwPFIo",
+      "l": 12,
+      "gold": "oIFPwDOdDHjK",
+      "case_pattern": "UlUUlUUlUUUl",
+      "n_upper": 8,
+      "distinct_chars": 11
+    },
+    {
+      "qid": "Q20",
+      "s": "ZygCaVSOkYCT",
+      "l": 12,
+      "gold": "TCYkOSVaCgyZ",
+      "case_pattern": "UllUlUUUlUUU",
+      "n_upper": 8,
+      "distinct_chars": 11
+    },
+    {
+      "qid": "Q21",
+      "s": "kKwKUIIjIQbCdFtV",
+      "l": 16,
+      "gold": "VtFdCbQIjIIUKwKk",
+      "case_pattern": "lUlUUUUlUUlUlUlU",
+      "n_upper": 10,
+      "distinct_chars": 13
+    },
+    {
+      "qid": "Q22",
+      "s": "wKQERjbBaCDfTiOA",
+      "l": 16,
+      "gold": "AOiTfDCaBbjREQKw",
+      "case_pattern": "lUUUUllUlUUlUlUU",
+      "n_upper": 10,
+      "distinct_chars": 16
+    },
+    {
+      "qid": "Q23",
+      "s": "gxsbFOISHZUEtGQl",
+      "l": 16,
+      "gold": "lQGtEUZHSIOFbsxg",
+      "case_pattern": "llllUUUUUUUUlUUl",
+      "n_upper": 10,
+      "distinct_chars": 16
+    },
+    {
+      "qid": "Q24",
+      "s": "BYXZnmcrhhPWHNPV",
+      "l": 16,
+      "gold": "VPNHWPhhrcmnZXYB",
+      "case_pattern": "UUUUllllllUUUUUU",
+      "n_upper": 10,
+      "distinct_chars": 14
+    },
+    {
+      "qid": "Q25",
+      "s": "MaTwLaNkBGWkqnyB",
+      "l": 16,
+      "gold": "BynqkWGBkNaLwTaM",
+      "case_pattern": "UlUlUlUlUUUllllU",
+      "n_upper": 8,
+      "distinct_chars": 13
+    },
+    {
+      "qid": "Q26",
+      "s": "kPDDMItuJiTMIfGLnngJ",
+      "l": 20,
+      "gold": "JgnnLGfIMTiJutIMDDPk",
+      "case_pattern": "lUUUUUllUlUUUlUUlllU",
+      "n_upper": 12,
+      "distinct_chars": 15
+    },
+    {
+      "qid": "Q27",
+      "s": "xEnRqvVHffDxBqMTzVGU",
+      "l": 20,
+      "gold": "UGVzTMqBxDffHVvqRnEx",
+      "case_pattern": "lUlUllUUllUlUlUUlUUU",
+      "n_upper": 11,
+      "distinct_chars": 16
+    },
+    {
+      "qid": "Q28",
+      "s": "csFjgmluMGipckbAJssy",
+      "l": 20,
+      "gold": "yssJAbkcpiGMulmgjFsc",
+      "case_pattern": "llUlllllUUlllllUUlll",
+      "n_upper": 5,
+      "distinct_chars": 17
+    },
+    {
+      "qid": "Q29",
+      "s": "AJtOJUwnkOUYjVdVwIos",
+      "l": 20,
+      "gold": "soIwVdVjYUOknwUJOtJA",
+      "case_pattern": "UUlUUUlllUUUlUlUlUll",
+      "n_upper": 11,
+      "distinct_chars": 15
+    },
+    {
+      "qid": "Q30",
+      "s": "KXtWiiNlWxCwmtzOtKBZ",
+      "l": 20,
+      "gold": "ZBKtOztmwCxWlNiiWtXK",
+      "case_pattern": "UUlUllUlUlUllllUlUUU",
+      "n_upper": 10,
+      "distinct_chars": 15
+    }
+  ],
+  "task2": [
+    {
+      "qid": "Q1",
+      "a": 690,
+      "b": 308,
+      "places": 2,
+      "gold": "2.24",
+      "expansion": "short_period",
+      "magnitude": "A>B",
+      "period": 6,
+      "decimal_len": 1,
+      "exact": "345/154"
+    },
+    {
+      "qid": "Q2",
+      "a": 40,
+      "b": 189,
+      "places": 2,
+      "gold": "0.21",
+      "expansion": "short_period",
+      "magnitude": "A<B",
+      "period": 6,
+      "decimal_len": 0,
+      "exact": "40/189"
+    },
+    {
+      "qid": "Q3",
+      "a": 42,
+      "b": 625,
+      "places": 2,
+      "gold": "0.07",
+      "expansion": "terminating",
+      "magnitude": "A<B",
+      "period": 0,
+      "decimal_len": 4,
+      "exact": "42/625"
+    },
+    {
+      "qid": "Q4",
+      "a": 654,
+      "b": 480,
+      "places": 2,
+      "gold": "1.36",
+      "expansion": "terminating",
+      "magnitude": "A>B",
+      "period": 0,
+      "decimal_len": 4,
+      "exact": "109/80"
+    },
+    {
+      "qid": "Q5",
+      "a": 673,
+      "b": 860,
+      "places": 2,
+      "gold": "0.78",
+      "expansion": "long_period",
+      "magnitude": "A<B",
+      "period": 21,
+      "decimal_len": 2,
+      "exact": "673/860"
+    },
+    {
+      "qid": "Q6",
+      "a": 703,
+      "b": 146,
+      "places": 5,
+      "gold": "4.81507",
+      "expansion": "short_period",
+      "magnitude": "A>B",
+      "period": 8,
+      "decimal_len": 1,
+      "exact": "703/146"
+    },
+    {
+      "qid": "Q7",
+      "a": 99,
+      "b": 385,
+      "places": 5,
+      "gold": "0.25714",
+      "expansion": "short_period",
+      "magnitude": "A<B",
+      "period": 6,
+      "decimal_len": 1,
+      "exact": "9/35"
+    },
+    {
+      "qid": "Q8",
+      "a": 80,
+      "b": 512,
+      "places": 5,
+      "gold": "0.15625",
+      "expansion": "terminating",
+      "magnitude": "A<B",
+      "period": 0,
+      "decimal_len": 5,
+      "exact": "5/32"
+    },
+    {
+      "qid": "Q9",
+      "a": 355,
+      "b": 160,
+      "places": 5,
+      "gold": "2.21875",
+      "expansion": "terminating",
+      "magnitude": "A>B",
+      "period": 0,
+      "decimal_len": 5,
+      "exact": "71/32"
+    },
+    {
+      "qid": "Q10",
+      "a": 363,
+      "b": 519,
+      "places": 5,
+      "gold": "0.69942",
+      "expansion": "long_period",
+      "magnitude": "A<B",
+      "period": 43,
+      "decimal_len": 0,
+      "exact": "121/173"
+    },
+    {
+      "qid": "Q11",
+      "a": 495,
+      "b": 312,
+      "places": 8,
+      "gold": "1.58653846",
+      "expansion": "short_period",
+      "magnitude": "A>B",
+      "period": 6,
+      "decimal_len": 3,
+      "exact": "165/104"
+    },
+    {
+      "qid": "Q12",
+      "a": 356,
+      "b": 540,
+      "places": 8,
+      "gold": "0.65925926",
+      "expansion": "short_period",
+      "magnitude": "A<B",
+      "period": 3,
+      "decimal_len": 1,
+      "exact": "89/135"
+    },
+    {
+      "qid": "Q13",
+      "a": 3,
+      "b": 768,
+      "places": 8,
+      "gold": "0.00390625",
+      "expansion": "terminating",
+      "magnitude": "A<B",
+      "period": 0,
+      "decimal_len": 8,
+      "exact": "1/256"
+    },
+    {
+      "qid": "Q14",
+      "a": 389,
+      "b": 256,
+      "places": 8,
+      "gold": "1.51953125",
+      "expansion": "terminating",
+      "magnitude": "A>B",
+      "period": 0,
+      "decimal_len": 8,
+      "exact": "389/256"
+    },
+    {
+      "qid": "Q15",
+      "a": 756,
+      "b": 892,
+      "places": 8,
+      "gold": "0.84753363",
+      "expansion": "long_period",
+      "magnitude": "A<B",
+      "period": 222,
+      "decimal_len": 0,
+      "exact": "189/223"
+    },
+    {
+      "qid": "Q16",
+      "a": 147,
+      "b": 99,
+      "places": 12,
+      "gold": "1.484848484848",
+      "expansion": "short_period",
+      "magnitude": "A>B",
+      "period": 2,
+      "decimal_len": 0,
+      "exact": "49/33"
+    },
+    {
+      "qid": "Q17",
+      "a": 391,
+      "b": 897,
+      "places": 12,
+      "gold": "0.435897435897",
+      "expansion": "short_period",
+      "magnitude": "A<B",
+      "period": 6,
+      "decimal_len": 0,
+      "exact": "17/39"
+    },
+    {
+      "qid": "Q18",
+      "a": 31,
+      "b": 512,
+      "places": 12,
+      "gold": "0.060546875000",
+      "expansion": "terminating",
+      "magnitude": "A<B",
+      "period": 0,
+      "decimal_len": 9,
+      "exact": "31/512"
+    },
+    {
+      "qid": "Q19",
+      "a": 899,
+      "b": 512,
+      "places": 12,
+      "gold": "1.755859375000",
+      "expansion": "terminating",
+      "magnitude": "A>B",
+      "period": 0,
+      "decimal_len": 9,
+      "exact": "899/512"
+    },
+    {
+      "qid": "Q20",
+      "a": 534,
+      "b": 681,
+      "places": 12,
+      "gold": "0.784140969163",
+      "expansion": "long_period",
+      "magnitude": "A<B",
+      "period": 113,
+      "decimal_len": 0,
+      "exact": "178/227"
+    }
+  ]
+}

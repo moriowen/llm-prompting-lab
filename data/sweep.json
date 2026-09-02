@@ -1,0 +1,1205 @@
+{
+  "pooled": [
+    [
+      0.0,
+      {
+        "accuracy": 0.025,
+        "self_consistency": 0.99,
+        "n": 200,
+        "invalid": 0
+      }
+    ],
+    [
+      0.1,
+      {
+        "accuracy": 0.03,
+        "self_consistency": 0.8,
+        "n": 200,
+        "invalid": 0
+      }
+    ],
+    [
+      0.2,
+      {
+        "accuracy": 0.04,
+        "self_consistency": 0.69,
+        "n": 200,
+        "invalid": 0
+      }
+    ],
+    [
+      0.3,
+      {
+        "accuracy": 0.04,
+        "self_consistency": 0.605,
+        "n": 200,
+        "invalid": 0
+      }
+    ],
+    [
+      0.4,
+      {
+        "accuracy": 0.04,
+        "self_consistency": 0.47,
+        "n": 200,
+        "invalid": 0
+      }
+    ],
+    [
+      0.5,
+      {
+        "accuracy": 0.045,
+        "self_consistency": 0.445,
+        "n": 200,
+        "invalid": 0
+      }
+    ],
+    [
+      0.6,
+      {
+        "accuracy": 0.04,
+        "self_consistency": 0.42,
+        "n": 200,
+        "invalid": 0
+      }
+    ],
+    [
+      0.7,
+      {
+        "accuracy": 0.025,
+        "self_consistency": 0.4,
+        "n": 200,
+        "invalid": 0
+      }
+    ],
+    [
+      0.8,
+      {
+        "accuracy": 0.02,
+        "self_consistency": 0.37,
+        "n": 200,
+        "invalid": 0
+      }
+    ],
+    [
+      0.9,
+      {
+        "accuracy": 0.01507537688442211,
+        "self_consistency": 0.3563819095477387,
+        "n": 199,
+        "invalid": 1
+      }
+    ],
+    [
+      1.0,
+      {
+        "accuracy": 0.015,
+        "self_consistency": 0.325,
+        "n": 200,
+        "invalid": 0
+      }
+    ]
+  ],
+  "decision": {
+    "shape": "flat_at_floor",
+    "knee": null,
+    "range": 0.03,
+    "curve": "accuracy",
+    "values": [
+      0.025,
+      0.03,
+      0.04,
+      0.04,
+      0.04,
+      0.045,
+      0.04,
+      0.025,
+      0.02,
+      0.01507537688442211,
+      0.015
+    ],
+    "temps": [
+      0.0,
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9,
+      1.0
+    ],
+    "pair": [
+      0.0,
+      1.0
+    ]
+  },
+  "per_model": {
+    "gemma3-4b|task1|l=5": {
+      "series": [
+        [
+          0.0,
+          {
+            "accuracy": 0.2,
+            "self_consistency": 1.0,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.1,
+          {
+            "accuracy": 0.24,
+            "self_consistency": 0.8800000000000001,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.2,
+          {
+            "accuracy": 0.32,
+            "self_consistency": 0.8,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.3,
+          {
+            "accuracy": 0.32,
+            "self_consistency": 0.8,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.4,
+          {
+            "accuracy": 0.32,
+            "self_consistency": 0.72,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.5,
+          {
+            "accuracy": 0.32,
+            "self_consistency": 0.64,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.6,
+          {
+            "accuracy": 0.32,
+            "self_consistency": 0.6,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.7,
+          {
+            "accuracy": 0.2,
+            "self_consistency": 0.52,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.8,
+          {
+            "accuracy": 0.16,
+            "self_consistency": 0.52,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.9,
+          {
+            "accuracy": 0.12,
+            "self_consistency": 0.48,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          1.0,
+          {
+            "accuracy": 0.12,
+            "self_consistency": 0.48,
+            "n": 25,
+            "invalid": 0
+          }
+        ]
+      ],
+      "shape": "monotone",
+      "knee": null,
+      "range": 0.2,
+      "curve": "accuracy",
+      "values": [
+        0.2,
+        0.24,
+        0.32,
+        0.32,
+        0.32,
+        0.32,
+        0.32,
+        0.2,
+        0.16,
+        0.12,
+        0.12
+      ],
+      "temps": [
+        0.0,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        1.0
+      ]
+    },
+    "gemma3-4b|task1|l=8": {
+      "series": [
+        [
+          0.0,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 1.0,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.1,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.76,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.2,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.5599999999999999,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.3,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.52,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.4,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.48,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.5,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.48,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.6,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.44000000000000006,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.7,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.4,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.8,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.36,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.9,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.36,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          1.0,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.36,
+            "n": 25,
+            "invalid": 0
+          }
+        ]
+      ],
+      "shape": "flat_at_floor",
+      "knee": null,
+      "range": 0.0,
+      "curve": "accuracy",
+      "values": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "temps": [
+        0.0,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        1.0
+      ]
+    },
+    "gemma3-4b|task2|l=5": {
+      "series": [
+        [
+          0.0,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 1.0,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.1,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.96,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.2,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.92,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.3,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.8400000000000002,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.4,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.76,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.5,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.76,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.6,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.76,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.7,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.72,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.8,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.72,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.9,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.64,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          1.0,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.5599999999999999,
+            "n": 25,
+            "invalid": 0
+          }
+        ]
+      ],
+      "shape": "flat_at_floor",
+      "knee": null,
+      "range": 0.0,
+      "curve": "accuracy",
+      "values": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "temps": [
+        0.0,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        1.0
+      ]
+    },
+    "gemma3-4b|task2|l=8": {
+      "series": [
+        [
+          0.0,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.96,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.1,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.8,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.2,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.68,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.3,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.5599999999999999,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.4,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.44000000000000006,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.5,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.32,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.6,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.32,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.7,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.36,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.8,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.27999999999999997,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.9,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.28,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          1.0,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.24000000000000005,
+            "n": 25,
+            "invalid": 0
+          }
+        ]
+      ],
+      "shape": "flat_at_floor",
+      "knee": null,
+      "range": 0.0,
+      "curve": "accuracy",
+      "values": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "temps": [
+        0.0,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        1.0
+      ]
+    },
+    "qwen2.5-1.5b|task1|l=5": {
+      "series": [
+        [
+          0.0,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 1.0,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.1,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.64,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.2,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.68,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.3,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.52,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.4,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.36,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.5,
+          {
+            "accuracy": 0.04,
+            "self_consistency": 0.28,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.6,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.24000000000000005,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.7,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.32,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.8,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.28,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.9,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.36,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          1.0,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.32,
+            "n": 25,
+            "invalid": 0
+          }
+        ]
+      ],
+      "shape": "flat_at_floor",
+      "knee": null,
+      "range": 0.04,
+      "curve": "accuracy",
+      "values": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.04,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "temps": [
+        0.0,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        1.0
+      ]
+    },
+    "qwen2.5-1.5b|task1|l=8": {
+      "series": [
+        [
+          0.0,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 1.0,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.1,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.68,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.2,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.5599999999999999,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.3,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.48,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.4,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.2,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.5,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.24000000000000005,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.6,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.2,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.7,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.2,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.8,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.2,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.9,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.2,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          1.0,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.2,
+            "n": 25,
+            "invalid": 0
+          }
+        ]
+      ],
+      "shape": "flat_at_floor",
+      "knee": null,
+      "range": 0.0,
+      "curve": "accuracy",
+      "values": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "temps": [
+        0.0,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        1.0
+      ]
+    },
+    "qwen2.5-1.5b|task2|l=5": {
+      "series": [
+        [
+          0.0,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.96,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.1,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.8,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.2,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.68,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.3,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.6,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.4,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.52,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.5,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.52,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.6,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.48,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.7,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.4,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.8,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.36,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.9,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.33,
+            "n": 24,
+            "invalid": 1
+          }
+        ],
+        [
+          1.0,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.24000000000000005,
+            "n": 25,
+            "invalid": 0
+          }
+        ]
+      ],
+      "shape": "flat_at_floor",
+      "knee": null,
+      "range": 0.0,
+      "curve": "accuracy",
+      "values": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "temps": [
+        0.0,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        1.0
+      ]
+    },
+    "qwen2.5-1.5b|task2|l=8": {
+      "series": [
+        [
+          0.0,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 1.0,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.1,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.8800000000000001,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.2,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.64,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.3,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.52,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.4,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.28,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.5,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.32,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.6,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.32,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.7,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.28,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.8,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.24000000000000005,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          0.9,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.2,
+            "n": 25,
+            "invalid": 0
+          }
+        ],
+        [
+          1.0,
+          {
+            "accuracy": 0.0,
+            "self_consistency": 0.2,
+            "n": 25,
+            "invalid": 0
+          }
+        ]
+      ],
+      "shape": "flat_at_floor",
+      "knee": null,
+      "range": 0.0,
+      "curve": "accuracy",
+      "values": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "temps": [
+        0.0,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        1.0
+      ]
+    }
+  }
+}

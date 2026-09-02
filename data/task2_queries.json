@@ -1,0 +1,122 @@
+[
+  {
+    "qid": "Q1",
+    "a": 744,
+    "b": 336,
+    "places": 5,
+    "gold": "2.21429",
+    "expansion": "short_period",
+    "magnitude": "A>B",
+    "period": 6,
+    "decimal_len": 1,
+    "exact": "31/14"
+  },
+  {
+    "qid": "Q2",
+    "a": 944,
+    "b": 960,
+    "places": 5,
+    "gold": "0.98333",
+    "expansion": "short_period",
+    "magnitude": "A<B",
+    "period": 1,
+    "decimal_len": 2,
+    "exact": "59/60"
+  },
+  {
+    "qid": "Q3",
+    "a": 159,
+    "b": 512,
+    "places": 5,
+    "gold": "0.31055",
+    "expansion": "terminating",
+    "magnitude": "A<B",
+    "period": 0,
+    "decimal_len": 9,
+    "exact": "159/512"
+  },
+  {
+    "qid": "Q4",
+    "a": 903,
+    "b": 672,
+    "places": 5,
+    "gold": "1.34375",
+    "expansion": "terminating",
+    "magnitude": "A>B",
+    "period": 0,
+    "decimal_len": 5,
+    "exact": "43/32"
+  },
+  {
+    "qid": "Q5",
+    "a": 364,
+    "b": 710,
+    "places": 5,
+    "gold": "0.51268",
+    "expansion": "long_period",
+    "magnitude": "A<B",
+    "period": 35,
+    "decimal_len": 1,
+    "exact": "182/355"
+  },
+  {
+    "qid": "Q6",
+    "a": 258,
+    "b": 243,
+    "places": 8,
+    "gold": "1.06172840",
+    "expansion": "short_period",
+    "magnitude": "A>B",
+    "period": 9,
+    "decimal_len": 0,
+    "exact": "86/81"
+  },
+  {
+    "qid": "Q7",
+    "a": 273,
+    "b": 861,
+    "places": 8,
+    "gold": "0.31707317",
+    "expansion": "short_period",
+    "magnitude": "A<B",
+    "period": 5,
+    "decimal_len": 0,
+    "exact": "13/41"
+  },
+  {
+    "qid": "Q8",
+    "a": 81,
+    "b": 768,
+    "places": 8,
+    "gold": "0.10546875",
+    "expansion": "terminating",
+    "magnitude": "A<B",
+    "period": 0,
+    "decimal_len": 8,
+    "exact": "27/256"
+  },
+  {
+    "qid": "Q9",
+    "a": 525,
+    "b": 256,
+    "places": 8,
+    "gold": "2.05078125",
+    "expansion": "terminating",
+    "magnitude": "A>B",
+    "period": 0,
+    "decimal_len": 8,
+    "exact": "525/256"
+  },
+  {
+    "qid": "Q10",
+    "a": 165,
+    "b": 531,
+    "places": 8,
+    "gold": "0.31073446",
+    "expansion": "long_period",
+    "magnitude": "A<B",
+    "period": 58,
+    "decimal_len": 0,
+    "exact": "55/177"
+  }
+]

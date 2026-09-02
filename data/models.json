@@ -1,0 +1,76 @@
+{
+  "qwen2.5-1.5b": {
+    "slot": "small",
+    "ollama_tag": "qwen2.5:1.5b",
+    "full_name": "Qwen2.5-1.5B-Instruct",
+    "org": "Alibaba Cloud (Qwen team)",
+    "params": "1.54B",
+    "quantization": "Q4_K_M",
+    "url": "https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct",
+    "ollama_url": "https://ollama.com/library/qwen2.5:1.5b",
+    "digest": "65ec06548149b04c096a120e4a6da9d4017ea809c91734ea5631e89f96ddc57b",
+    "local": true,
+    "installed": true,
+    "defaults": "",
+    "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "qwen2",
+      "families": [
+        "qwen2"
+      ],
+      "parameter_size": "1.5B",
+      "quantization_level": "Q4_K_M"
+    }
+  },
+  "gemma3-4b": {
+    "slot": "mid",
+    "ollama_tag": "gemma3:4b",
+    "full_name": "Gemma 3 4B Instruction-Tuned",
+    "org": "Google DeepMind",
+    "params": "4.30B",
+    "quantization": "Q4_K_M",
+    "url": "https://huggingface.co/google/gemma-3-4b-it",
+    "ollama_url": "https://ollama.com/library/gemma3:4b",
+    "digest": "a2af6cc3eb7fa8be8504abaf9b04e88f17a119ec3f04a3addf55f92841195f5a",
+    "local": true,
+    "installed": true,
+    "defaults": "top_k                          64\ntop_p                          0.95\nstop                           \"<end_of_turn>\"\ntemperature                    1",
+    "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "gemma3",
+      "families": [
+        "gemma3"
+      ],
+      "parameter_size": "4.3B",
+      "quantization_level": "Q4_K_M"
+    }
+  },
+  "mistral-7b": {
+    "slot": "large",
+    "ollama_tag": "mistral:7b",
+    "full_name": "Mistral-7B-Instruct-v0.3",
+    "org": "Mistral AI",
+    "params": "7.25B",
+    "quantization": "Q4_K_M",
+    "url": "https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.3",
+    "ollama_url": "https://ollama.com/library/mistral:7b",
+    "digest": null,
+    "local": false,
+    "installed": false
+  },
+  "qwen2.5-7b": {
+    "slot": "large-alt",
+    "ollama_tag": "qwen2.5:7b",
+    "full_name": "Qwen2.5-7B-Instruct",
+    "org": "Alibaba Cloud (Qwen team)",
+    "params": "7.62B",
+    "quantization": "Q4_K_M",
+    "url": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct",
+    "ollama_url": "https://ollama.com/library/qwen2.5:7b",
+    "digest": null,
+    "local": false,
+    "installed": false
+  }
+}

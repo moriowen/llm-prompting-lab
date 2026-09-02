@@ -1,0 +1,140 @@
+{
+  "task1": {
+    "5": [
+      {
+        "qid": "Q1",
+        "s": "zuBZd",
+        "l": 5,
+        "gold": "dZBuz",
+        "case_pattern": "llUUl",
+        "n_upper": 2,
+        "distinct_chars": 5
+      },
+      {
+        "qid": "Q2",
+        "s": "bDMWI",
+        "l": 5,
+        "gold": "IWMDb",
+        "case_pattern": "lUUUU",
+        "n_upper": 4,
+        "distinct_chars": 5
+      },
+      {
+        "qid": "Q3",
+        "s": "qAItw",
+        "l": 5,
+        "gold": "wtIAq",
+        "case_pattern": "lUUll",
+        "n_upper": 2,
+        "distinct_chars": 5
+      }
+    ],
+    "8": [
+      {
+        "qid": "Q4",
+        "s": "pWQddzhQ",
+        "l": 8,
+        "gold": "QhzddQWp",
+        "case_pattern": "lUUllllU",
+        "n_upper": 3,
+        "distinct_chars": 6
+      },
+      {
+        "qid": "Q5",
+        "s": "OFrwDiRT",
+        "l": 8,
+        "gold": "TRiDwrFO",
+        "case_pattern": "UUllUlUU",
+        "n_upper": 5,
+        "distinct_chars": 8
+      },
+      {
+        "qid": "Q6",
+        "s": "CuUfSaow",
+        "l": 8,
+        "gold": "woaSfUuC",
+        "case_pattern": "UlUlUlll",
+        "n_upper": 3,
+        "distinct_chars": 8
+      }
+    ]
+  },
+  "task2": {
+    "5": [
+      {
+        "qid": "Q1",
+        "a": 822,
+        "b": 52,
+        "places": 5,
+        "gold": "15.80769",
+        "expansion": "short_period",
+        "magnitude": "A>B",
+        "period": 6,
+        "decimal_len": 1,
+        "exact": "411/26"
+      },
+      {
+        "qid": "Q2",
+        "a": 904,
+        "b": 984,
+        "places": 5,
+        "gold": "0.91870",
+        "expansion": "short_period",
+        "magnitude": "A<B",
+        "period": 5,
+        "decimal_len": 0,
+        "exact": "113/123"
+      },
+      {
+        "qid": "Q3",
+        "a": 51,
+        "b": 256,
+        "places": 5,
+        "gold": "0.19922",
+        "expansion": "terminating",
+        "magnitude": "A<B",
+        "period": 0,
+        "decimal_len": 8,
+        "exact": "51/256"
+      }
+    ],
+    "8": [
+      {
+        "qid": "Q4",
+        "a": 249,
+        "b": 9,
+        "places": 8,
+        "gold": "27.66666667",
+        "expansion": "short_period",
+        "magnitude": "A>B",
+        "period": 1,
+        "decimal_len": 0,
+        "exact": "83/3"
+      },
+      {
+        "qid": "Q5",
+        "a": 532,
+        "b": 861,
+        "places": 8,
+        "gold": "0.61788618",
+        "expansion": "short_period",
+        "magnitude": "A<B",
+        "period": 5,
+        "decimal_len": 0,
+        "exact": "76/123"
+      },
+      {
+        "qid": "Q6",
+        "a": 177,
+        "b": 768,
+        "places": 8,
+        "gold": "0.23046875",
+        "expansion": "terminating",
+        "magnitude": "A<B",
+        "period": 0,
+        "decimal_len": 8,
+        "exact": "59/256"
+      }
+    ]
+  }
+}

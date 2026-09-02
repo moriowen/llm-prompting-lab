@@ -1,0 +1,92 @@
+[
+  {
+    "qid": "Q1",
+    "s": "PkUuq",
+    "l": 5,
+    "gold": "quUkP",
+    "case_pattern": "UlUll",
+    "n_upper": 2,
+    "distinct_chars": 5
+  },
+  {
+    "qid": "Q2",
+    "s": "inNjf",
+    "l": 5,
+    "gold": "fjNni",
+    "case_pattern": "llUll",
+    "n_upper": 1,
+    "distinct_chars": 5
+  },
+  {
+    "qid": "Q3",
+    "s": "fugJr",
+    "l": 5,
+    "gold": "rJguf",
+    "case_pattern": "lllUl",
+    "n_upper": 1,
+    "distinct_chars": 5
+  },
+  {
+    "qid": "Q4",
+    "s": "JQJPc",
+    "l": 5,
+    "gold": "cPJQJ",
+    "case_pattern": "UUUUl",
+    "n_upper": 4,
+    "distinct_chars": 4
+  },
+  {
+    "qid": "Q5",
+    "s": "gypHq",
+    "l": 5,
+    "gold": "qHpyg",
+    "case_pattern": "lllUl",
+    "n_upper": 1,
+    "distinct_chars": 5
+  },
+  {
+    "qid": "Q6",
+    "s": "clBFMztw",
+    "l": 8,
+    "gold": "wtzMFBlc",
+    "case_pattern": "llUUUlll",
+    "n_upper": 3,
+    "distinct_chars": 8
+  },
+  {
+    "qid": "Q7",
+    "s": "mbwCcDdO",
+    "l": 8,
+    "gold": "OdDcCwbm",
+    "case_pattern": "lllUlUlU",
+    "n_upper": 3,
+    "distinct_chars": 8
+  },
+  {
+    "qid": "Q8",
+    "s": "uVTztcSp",
+    "l": 8,
+    "gold": "pSctzTVu",
+    "case_pattern": "lUUlllUl",
+    "n_upper": 3,
+    "distinct_chars": 8
+  },
+  {
+    "qid": "Q9",
+    "s": "VAYCXPhA",
+    "l": 8,
+    "gold": "AhPXCYAV",
+    "case_pattern": "UUUUUUlU",
+    "n_upper": 7,
+    "distinct_chars": 7
+  },
+  {
+    "qid": "Q10",
+    "s": "EklaSuVr",
+    "l": 8,
+    "gold": "rVuSalkE",
+    "case_pattern": "UlllUlUl",
+    "n_upper": 3,
+    "distinct_chars": 8
+  }
+]
