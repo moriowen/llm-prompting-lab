@@ -18,6 +18,15 @@ result tables. `main.py report` runs `verify.py` first and refuses to build if i
 - **Self-hosted only.** Ollama on localhost, native `/api/chat`, no hosted APIs, no
   API keys, no `.env`. The `/v1` OpenAI-compatible endpoint is not used because it hides
   `num_ctx`, `top_k` and `seed`.
+- **Inference can move to PACE ICE; the experiment cannot.** The 8 GB laptop is the
+  bottleneck, so ollama may run on an ICE `ice-gpu` A100 reached through
+  `ssh -L 11434:<compute-node>:11434`. Everything else — prompt building, grading,
+  traces, analysis — stays local, and the client still talks to `localhost:11434`, so
+  the tunnel is the only moving part (`scripts/ice-tunnel.sh`; `docs/PACE-ICE.md` is the runbook and the gotcha list).
+  `BDS_OLLAMA_HOST` overrides the URL; `BDS_BACKEND` labels the machine and is written
+  into every trace header, since the tunnel makes the two backends indistinguishable
+  from the client and timings are not comparable across them. Sampling options stay
+  pinned exactly as they are: only the hardware changes, so the tables stay comparable.
 - **Zero dependencies.** `urllib` for HTTP, `decimal`/`fractions` for arithmetic. The
   tokenizer count in `tokens.py` is measured through ollama's own `prompt_eval_count`
   rather than by adding a `tokenizers` dependency.

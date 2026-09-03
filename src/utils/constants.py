@@ -1,5 +1,7 @@
 """Model provenance. This dict is deliverable (1) -- the report table is generated from it."""
 
+import os
+
 # alias -> everything R5 asks for, plus the ollama tag used to reach it. `digest` is
 # filled in by `main.py models`, which reads it back from the local ollama install:
 # a tag is mutable, a digest is not, and the run is only reproducible against a digest.
@@ -62,7 +64,25 @@ MODEL_REGISTRY = {
 # The three that go in the six-column tables. Ordered small -> large.
 LADDER = ("qwen2.5-1.5b", "gemma3-4b", "mistral-7b")
 
-OLLAMA_HOST = "http://localhost:11434"
+# Inference backend. Experiment code never runs on the GPU box: PACE ICE only serves
+# ollama, while prompts, grading and traces stay on the laptop. An
+# `ssh -L 11434:<compute-node>:11434 amohite8@login-ice.pace.gatech.edu` tunnel makes the
+# remote server appear on this same local port, so the default is right for both
+# backends; BDS_OLLAMA_HOST (or ollama's own OLLAMA_HOST) overrides it.
+def _host(raw: str | None) -> str:
+    if not raw:
+        return "http://localhost:11434"
+    raw = raw.strip().rstrip("/")
+    # Ollama's convention is a bare host:port; urllib needs the scheme.
+    return raw if raw.startswith(("http://", "https://")) else f"http://{raw}"
+
+
+OLLAMA_HOST = _host(os.environ.get("BDS_OLLAMA_HOST") or os.environ.get("OLLAMA_HOST"))
+
+# Which machine actually decoded a cell. A tunnel hides this -- the URL is localhost
+# either way -- so it is declared, not inferred, and written into every trace header:
+# wall_ms from an A100 and wall_ms from an 8 GB laptop are not the same measurement.
+BACKEND = os.environ.get("BDS_BACKEND", "local-m2-air")
 
 TASKS = ("task1", "task2")
 ARMS = ("zeroshot", "fewshot", "cot", "fewshot_verbose", "cot_verbose")

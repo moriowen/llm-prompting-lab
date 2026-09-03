@@ -5,7 +5,7 @@ import time
 
 from src import generate, grade as grading, ollama
 from src.utils import config, prompts, trace
-from src.utils.constants import MODEL_REGISTRY, TASK_NAMES
+from src.utils.constants import BACKEND, MODEL_REGISTRY, OLLAMA_HOST, TASK_NAMES
 
 
 def load_queries(task: str, ladder: bool = False):
@@ -25,7 +25,8 @@ def run_cell(model_alias: str, task: str, arm: str, temp: float, k: int,
     tr = trace.Trace(model_alias, task, arm, temp, resume=resume,
                      ollama_tag=entry["ollama_tag"], digest=entry.get("digest"),
                      prompt_version=prompts.PROMPT_VERSION, k=k, ladder=ladder,
-                     task_name=TASK_NAMES[task], **config.frozen())
+                     task_name=TASK_NAMES[task], backend=BACKEND, host=OLLAMA_HOST,
+                     **config.frozen())
 
     counts = {"done": 0, "skipped": 0, "correct": 0, "invalid": 0}
     for item in items:

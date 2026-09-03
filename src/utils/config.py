@@ -45,6 +45,30 @@ NUM_PREDICT = {
     ("task2", "fewshot_verbose"): 128, ("task2", "cot_verbose"): 1536,
 }
 
+# Where a completion must stop. Keyed by (task, arm) for the same reason num_predict is:
+# the continuation a model invents depends on the shape of the prompt it was given.
+# Without this, a model that never emits a stop token keeps going and writes its own
+# few-shot examples after the answer -- mistral:7b truncated 52% of task1 fewshot at the
+# 128-token cap, and the runaway text then failed the length rule. These six arms all
+# instruct "output only the answer, nothing else", so the answer is one line and the
+# first newline ends it. A marker keyed to the prompt's own label ("\nString:") was
+# tried first and leaked -- the continuation does not always reproduce the label. No
+# response among the 8137 collected before this change began with a newline, so this
+# cannot truncate an answer to empty. The CoT arms get no stop: their reasoning spans
+# many lines by design and ends at "FINAL:", so any marker would cut the work short.
+STOP = {
+    ("task1", "zeroshot"): ["\n"],
+    ("task1", "fewshot"): ["\n"],
+    ("task1", "fewshot_verbose"): ["\n"],
+    ("task1", "cot"): [],
+    ("task1", "cot_verbose"): [],
+    ("task2", "zeroshot"): ["\n"],
+    ("task2", "fewshot"): ["\n"],
+    ("task2", "fewshot_verbose"): ["\n"],
+    ("task2", "cot"): [],
+    ("task2", "cot_verbose"): [],
+}
+
 REQUEST_TIMEOUT = 600
 
 # --- sweep decision rule, fixed before any 7B data exists (plan section 3.2) ---------
@@ -68,6 +92,8 @@ def options(temperature: float, seed: int, task: str, arm: str) -> dict:
         "num_ctx": NUM_CTX,
         "num_thread": NUM_THREAD,
         "num_predict": NUM_PREDICT[(task, arm)],
+        # ollama drops an empty list, so only send it where there is one.
+        **({"stop": STOP[(task, arm)]} if STOP[(task, arm)] else {}),
     }
 
 
@@ -78,6 +104,7 @@ def frozen() -> dict:
         "repeat_penalty": REPEAT_PENALTY, "num_ctx": NUM_CTX,
         "num_thread": NUM_THREAD,
         "num_predict": {f"{k[0]}.{k[1]}": v for k, v in NUM_PREDICT.items()},
+        "stop": {f"{k[0]}.{k[1]}": v for k, v in STOP.items()},
         "n_shots": N_SHOTS,
         "temp_grid": TEMP_GRID, "inflection_curve": INFLECTION_CURVE,
     }

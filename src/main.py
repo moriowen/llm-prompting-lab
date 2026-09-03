@@ -6,7 +6,7 @@ import sys
 
 from src import experiment, generate, ollama, sweep as sweep_mod, tokens as tokens_mod, verify
 from src.utils import config
-from src.utils.constants import ARMS, LADDER, MODEL_REGISTRY, TASKS
+from src.utils.constants import ARMS, BACKEND, LADDER, MODEL_REGISTRY, OLLAMA_HOST, TASKS
 
 
 def _models(arg: str | None) -> list[str]:
@@ -78,8 +78,31 @@ def cmd_models(args):
     print("\nwrote data/models.json (this file is deliverable (1)'s model table)")
 
 
+def cmd_ping(args):
+    """Check the configured ollama is reachable -- the tunnel is the usual thing broken."""
+    print(f"backend={BACKEND}  host={OLLAMA_HOST}")
+    try:
+        present = ollama.installed()
+    except Exception as e:
+        raise SystemExit(f"unreachable: {e}\n"
+                         "if this is PACE ICE: is the salloc still alive, is `ollama serve` "
+                         "running on the compute node, and is the ssh -L tunnel open?")
+    print(f"reachable; {len(present)} model(s) pulled there:")
+    for tag, digest in sorted(present.items()):
+        here = " <- in the ladder" if any(
+            e["ollama_tag"] == tag and a in LADDER for a, e in MODEL_REGISTRY.items()) else ""
+        print(f"  {tag:20} {digest[:19]}{here}")
+    missing = [MODEL_REGISTRY[a]["ollama_tag"] for a in LADDER
+               if MODEL_REGISTRY[a]["ollama_tag"] not in present]
+    if missing:
+        print("\nnot pulled on this backend: " + ", ".join(missing)
+              + "\n  run on whichever machine serves this host: "
+              + "; ".join(f"ollama pull {t}" for t in missing))
+
+
 def cmd_run(args):
     """The experiment loop."""
+    print(f"backend={BACKEND}  host={OLLAMA_HOST}")
     experiment.run(_models(args.models), _csv(args.tasks, TASKS), _csv(args.arms, ARMS),
                    _temps(args.temps), args.k, resume=not args.no_resume, ladder=args.ladder)
 
@@ -165,6 +188,7 @@ def main(argv=None):
 
     sub.add_parser("generate", help="regenerate data/*.json from the seeds").set_defaults(fn=cmd_generate)
     sub.add_parser("verify", help="check the ground-truth invariant").set_defaults(fn=cmd_verify)
+    sub.add_parser("ping", help="check the configured ollama backend is reachable").set_defaults(fn=cmd_ping)
     sub.add_parser("models", help="record digests and default hyperparameters").set_defaults(fn=cmd_models)
 
     r = sub.add_parser("run", help="run experiment cells")
