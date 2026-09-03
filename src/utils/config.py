@@ -15,7 +15,7 @@ N_SHOTS = 3
 # 0.0 -> 1.0 in 0.1 steps: N=10 intervals, 11 grid points.
 TEMP_GRID = [round(i / 10, 1) for i in range(11)]
 
-K_SWEEP = 5        # every grid point
+K_SWEEP = 3        # every grid point
 K_TABLE = 10       # top-up, only the two temperatures that reach the deliverable table
 K_DETERMINISM = 3  # temp 0.0, to check greedy decoding is actually deterministic here
 

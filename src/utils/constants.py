@@ -59,6 +59,37 @@ MODEL_REGISTRY = {
         "digest": None,
         "local": False,
     },
+    # --- supplementary, not in LADDER and not in the deliverable tables --------------
+    # Third vendor at the same scale as mistral-7b, and the newest recipe among the
+    # 7-9B options: separates "the large slot underperforms" from "mistral:7b in
+    # particular underperforms", which one model cannot distinguish.
+    "llama3.1-8b": {
+        "slot": "supp-vendor",
+        "ollama_tag": "llama3.1:8b",
+        "full_name": "Llama 3.1 8B Instruct",
+        "org": "Meta AI",
+        "params": "8.03B",
+        "quantization": "Q4_K_M",
+        "url": "https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct",
+        "ollama_url": "https://ollama.com/library/llama3.1:8b",
+        "digest": None,
+        "local": False,
+    },
+    # gemma3-4b is the only model in the ladder that solves task 1 at all, so the
+    # scaling question is sharpest inside its own family. Gemma 3 has no 7-9B rung --
+    # it goes 4b -> 12b -- which is why this is the size step and not an 8B.
+    "gemma3-12b": {
+        "slot": "supp-scale",
+        "ollama_tag": "gemma3:12b",
+        "full_name": "Gemma 3 12B Instruction-Tuned",
+        "org": "Google DeepMind",
+        "params": "12.2B",
+        "quantization": "Q4_K_M",
+        "url": "https://huggingface.co/google/gemma-3-12b-it",
+        "ollama_url": "https://ollama.com/library/gemma3:12b",
+        "digest": None,
+        "local": False,
+    },
 }
 
 # The three that go in the six-column tables. Ordered small -> large.

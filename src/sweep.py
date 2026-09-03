@@ -4,6 +4,7 @@ from collections import Counter, defaultdict
 
 from src import generate
 from src.utils import config, trace
+from src.utils.constants import LADDER
 
 
 def query_index() -> dict:
@@ -24,8 +25,16 @@ def cells(trials, arm="zeroshot", strict=False) -> dict:
     field = "correct" if strict else "correct_norm"
     groups = defaultdict(list)
     for t in trials:
-        # Ladder trials carry colliding qids for different queries; joining them to the
-        # main query files would silently mislabel their complexity band.
+        # Models outside LADDER are supplementary: they are run to answer side questions
+        # and never reach the tables. Dropped here rather than downstream because report()
+        # pools every surviving cell into the curve that picks the two table temperatures,
+        # so admitting them would let a model the deliverable never reports move the
+        # selection. Their own curves are analysed separately.
+        if t["model"] not in LADDER:
+            continue
+        # t["ladder"] is the supplementary *query* set, unrelated to LADDER above. Its
+        # trials carry colliding qids for different queries, so joining them to the main
+        # query files would silently mislabel their complexity band.
         if t["arm"] != arm or t.get("ladder") or t["qid"] not in index[t["task"]]:
             continue
         band = band_of(t["task"], index[t["task"]][t["qid"]])
