@@ -54,10 +54,16 @@ result tables. `main.py report` runs `verify.py` first and refuses to build if i
 - **Three few-shot shots**, drawn from a held-out pool generated with a different seed,
   asserted disjoint from the test set, and taken from the item's own complexity band.
 
-- **Two output surfaces.** `report.py` builds the graded deliverable; `ui.py` builds an
-  explorer for inspecting runs in progress. Both embed their data and open from the
-  filesystem — no server, no CDN. The explorer truncates raw responses to 600 characters
-  so a full CoT sweep does not produce a 40 MB page.
+- **Two output surfaces.** `report.py` builds the graded deliverable; `ui.py` builds the
+  standalone page, which has two panes over one corpus: the write-up (`writeup.py`) and
+  the trial explorer. Both embed their data and open from the filesystem — no server, no
+  CDN. The explorer truncates raw responses to 600 characters so a full CoT sweep does not
+  produce a 40 MB page.
+- **The write-up's numbers are references, not literals.** `writeup.py` holds the authored
+  prose with `{acc qwen3-32b task1 cot}`-style placeholders resolved from `runs/` at build
+  time. Same reason as the ground-truth invariant: a hand-typed results paragraph silently
+  goes stale the moment a cell is re-graded or a run is extended. An unresolvable
+  reference raises rather than rendering blank.
 
 ## Conventions
 
