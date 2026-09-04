@@ -37,7 +37,8 @@ def run_cell(model_alias: str, task: str, arm: str, temp: float, k: int,
                 counts["skipped"] += 1
                 continue
             try:
-                out = ollama.chat(entry["ollama_tag"], prompt, config.options(temp, seed, task, arm))
+                out = ollama.chat(entry["ollama_tag"], prompt,
+                                  config.options(temp, seed, task, arm), entry.get("think"))
             except ollama.OllamaError as e:
                 tr.close()
                 raise SystemExit(f"\n{e}\n(progress is saved; re-run with --resume)")
@@ -49,7 +50,7 @@ def run_cell(model_alias: str, task: str, arm: str, temp: float, k: int,
             tr.trial(qid=item["qid"], seed=seed, prompt=prompt, raw=out["text"],
                      truncated=truncated, invalid=invalid, **g,
                      **{k2: out[k2] for k2 in ("done_reason", "prompt_tokens",
-                                               "output_tokens", "wall_ms")})
+                                               "output_tokens", "wall_ms", "thinking")})
             counts["done"] += 1
             counts["correct"] += g["correct_norm"]
             counts["invalid"] += invalid

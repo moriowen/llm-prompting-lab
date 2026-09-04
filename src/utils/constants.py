@@ -106,6 +106,10 @@ MODEL_REGISTRY = {
         "ollama_url": "https://ollama.com/library/qwen3:32b",
         "digest": None,
         "local": False,
+        # Reasoning off, so this cell measures the same thing as every other model's:
+        # an answer produced without externalised work. With it on the model emits 429
+        # tokens of reasoning and the arm stops being zero-shot in anything but name.
+        "think": False,
     },
 }
 

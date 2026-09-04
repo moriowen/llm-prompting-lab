@@ -26,7 +26,7 @@ def _post(path: str, payload: dict, timeout: int = REQUEST_TIMEOUT) -> dict:
         raise OllamaError(f"cannot reach ollama at {OLLAMA_HOST} -- is it running? ({e.reason})") from e
 
 
-def chat(model_tag: str, prompt: str, options: dict) -> dict:
+def chat(model_tag: str, prompt: str, options: dict, think=None) -> dict:
     """One completion. Returns the text plus everything the trace header needs."""
     started = time.monotonic()
     body = _post("/api/chat", {
@@ -34,9 +34,15 @@ def chat(model_tag: str, prompt: str, options: dict) -> dict:
         "messages": [{"role": "user", "content": prompt}],
         "stream": False,
         "options": options,
+        # Hybrid reasoning models (qwen3) emit a thinking block unless it is switched
+        # off. Omitted entirely when None, so nothing changes for the other models.
+        **({"think": think} if think is not None else {}),
     })
     return {
         "text": body["message"]["content"],
+        # ollama returns reasoning in its own field, so the answer needs no extraction.
+        # Recorded rather than dropped: it is what a think=True cell actually produced.
+        "thinking": body["message"].get("thinking") or "",
         "done_reason": body.get("done_reason"),
         "prompt_tokens": body.get("prompt_eval_count"),
         "output_tokens": body.get("eval_count"),

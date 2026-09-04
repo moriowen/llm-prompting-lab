@@ -49,9 +49,16 @@ def collect() -> dict:
             "e": t.get("error_type", ""), "v": int(bool(t.get("invalid"))),
             "r": raw[:RAW_CHARS] + ("…" if len(raw) > RAW_CHARS else ""),
         })
-    names = {a: e["full_name"] for a, e in MODEL_REGISTRY.items()}
+    # Size leads the label so the ascending order reads as an ordering rather than as an
+    # arbitrary shuffle -- full_name spells the size differently per vendor ("1.5B",
+    # "4B", "32B"), and two of the seven do not carry it at all.
+    names = {a: f"{e['params']} · {e['full_name']}" for a, e in MODEL_REGISTRY.items()}
+    # Ascending by parameter count. Sorted here rather than in JS because params lives in
+    # the registry, and the page only ever sees the aliases its trials happen to use.
+    order = sorted(MODEL_REGISTRY, key=lambda a: float(MODEL_REGISTRY[a]["params"].rstrip("B")))
     labels = {**TASK_NAMES, **{f"{k}@ladder": f"{v} — ladder" for k, v in TASK_NAMES.items()}}
-    return {"trials": rows, "queries": queries, "names": names, "tasks": labels}
+    return {"trials": rows, "queries": queries, "names": names, "tasks": labels,
+            "order": order}
 
 
 PAGE = r"""<!doctype html><html><head><meta charset="utf-8">
@@ -168,7 +175,12 @@ function tally(rows, f) {
 // its left, so every combination the page offers has data behind it.
 function options() {
   const byModel = tally(D.trials, t => t.m);
-  fill($('m'), Object.keys(byModel).sort(), byModel, D.names);
+  // Smallest model first, so the dropdown reads as the size ladder it is. An alias the
+  // registry does not list sorts last rather than being dropped: a run whose model was
+  // renamed out of the registry is still worth being able to open.
+  const rank = m => (D.order.indexOf(m) + 1 || D.order.length + 1);
+  fill($('m'), Object.keys(byModel).sort((a, b) => rank(a) - rank(b) || a.localeCompare(b)),
+       byModel, D.names);
   const forModel = D.trials.filter(t => t.m === $('m').value);
   const byTask = tally(forModel, t => t.k);
   fill($('k'), Object.keys(byTask).sort(), byTask, D.tasks);
