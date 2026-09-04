@@ -3,12 +3,34 @@ COURSE TITLE: CS6220 Big Data Systems and Analytics (Fall 2026, session cs6220-A
 HW1: Programming [X]  Reading Critique [ ]
 
 Student Name: Atharva Mohite
-Student ID: _________________
+Student ID: 904308771
+
+**Live site (analysis write-up and interactive run explorer): https://llm-prompting-lab.vercel.app/**
 
 Project repository: `https://github.com/moriowen/llm-prompting-lab` (private)
-Interactive report and run explorer: deployed as a static page on Vercel (project `llm-prompting-lab`)
 
 ---
+
+<a id="toc"></a>
+
+## Contents
+
+| Section | |
+|---|---|
+| [Preface: how this document is organised](#preface) | Structure, and the two populations of AI involved |
+| [Shared AI interaction record](#tools) | Step 2 item 1 for all five questions: every AI tool used |
+| [Compute environment: PACE ICE](#pace) | How the Georgia Tech A100 cluster was used, short and long |
+| [Question 1: model provenance and hyperparameters](#q1) | Deliverable 1 |
+| [Question 2: the result tables](#q2) | Deliverable 2 |
+| [Question 3: comparison across the LLMs](#q3) | Deliverable 3 |
+| [Question 4: comparison across the two tasks](#q4) | Deliverable 4 |
+| [Question 5: critique of the LLM reasoning outputs](#q5) | Deliverable 5 |
+| [Step 3: References](#refs) | Does not count towards the page limit |
+| [Step 4: Appendices](#appendix) | Does not count towards the page limit |
+
+---
+
+<a id="preface"></a>
 
 ## Preface: how this document is organised
 
@@ -21,17 +43,27 @@ overall multi-round strategy, are stated once in the block below. Each question 
 its own item 2 (exact prompts), 3 (round-by-round workflow), 4a (prompting strategy) and 4b
 (critique of the AI's response).
 
+<a id="tools"></a>
+
 ### Shared AI interaction record (Step 2, item 1, for all five questions)
 
 Two separate populations of AI were involved in this project, and keeping them apart is the
-methodological point of the whole submission.
+methodological point of the whole submission. The **assistant** tools helped me design the
+experiment, write the harness and draft the analysis. The **subject** models are the seven
+models under test, which are the objects of study and the only source of the values in the
+result tables.
 
-| | Assistant AI | Subject AI |
-|---|---|---|
-| Role | Helped design the experiment, write the harness, and draft the analysis | The seven models under test, which are the objects of study |
-| Which | Anthropic Claude (Opus 4.x / Opus 5) via the Claude Code CLI | qwen2.5:1.5b, gemma3:4b, mistral:7b, qwen2.5:7b, llama3.1:8b, gemma3:12b, qwen3:32b |
-| Download / API URL | `https://claude.ai/code` (CLI: `npm i -g @anthropic-ai/claude-code`); underlying API `https://api.anthropic.com/v1/messages` | Served locally by Ollama, downloaded from `https://ollama.com` (`https://ollama.com/download`). Native endpoint `http://localhost:11434/api/chat`. Weights: `https://ollama.com/library/<tag>`; upstream cards on `https://huggingface.co/` |
-| Produced what | Code, plots, prose drafts, this document | Only the answer strings inside the two result tables |
+| Tool | Population | What I used it for | Tool URL / download |
+|---|---|---|---|
+| Anthropic Claude (Opus 4.x / Opus 5) via the Claude Code CLI | Assistant | The bulk of the work: experiment design, the Python harness, the sweep and grading logic, the analysis, and this document. All Step 2 prompt records below are from these sessions. | `https://claude.ai/code` (CLI: `npm i -g @anthropic-ai/claude-code`); underlying API `https://api.anthropic.com/v1/messages` |
+| OpenAI ChatGPT | Assistant | General question-and-answer and concept checking: understanding the assignment's framing, background reading on data contamination, and clarifying LLM concepts. Not used for the harness code, the grading, or the analysis. | `https://chatgpt.com` |
+| OpenAI Codex | Assistant | The presentation layer: the UI and report HTML, meaning the explorer page and report styling. Not used for the experiment code, the grading, or the statistics. | `https://chatgpt.com/codex` (CLI: `npm i -g @openai/codex`) |
+| qwen2.5:1.5b, gemma3:4b, mistral:7b, qwen2.5:7b, llama3.1:8b, gemma3:12b, qwen3:32b | Subject | The objects of study. They produced only the answer strings inside the two result tables. | Served locally by Ollama, downloaded from `https://ollama.com` (`https://ollama.com/download`). Native endpoint `http://localhost:11434/api/chat`. Weights: `https://ollama.com/library/<tag>`; upstream cards on `https://huggingface.co/` |
+
+No assistant tool contributed a number to the tables, the grading, or the statistics. The
+division of labour matters for the critique in [Question 5](#q5): ChatGPT and Codex never
+touched the measurement path, so the instrument bugs described there belong to the Claude
+Code sessions and to me.
 
 No hosted model API was used for the experiment itself. All 14,935 graded trials were
 decoded by a self-hosted Ollama server, either on my M2 MacBook Air (8 GB) or on a Georgia
@@ -48,6 +80,71 @@ assertion fails. The only AI-produced values anywhere in the deliverable are the
 result tables, which is the point of the assignment.
 
 ---
+
+<a id="pace"></a>
+
+## Compute environment: Georgia Tech PACE ICE
+
+### The short version
+
+My laptop is an M2 MacBook Air with 8 GB of RAM, which caps me at roughly a 7B model at
+Q4 quantisation and cannot finish the CoT arms in reasonable time. So inference, and only
+inference, moved to a Georgia Tech PACE ICE A100. I connect the GT VPN, request a GPU node
+through Slurm, run an Ollama server on that node, and open an SSH tunnel that forwards the
+node's port 11434 to my Mac's own `localhost:11434`. Every other part of the project keeps
+running on the laptop. Because the tunnel makes the remote server appear at the same address
+a local one would, no code path changes between the two backends.
+
+### The longer version
+
+The split is the point. Prompt building, grading, ground truth, traces and analysis all stay
+on the Mac. ICE serves nothing but Ollama.
+
+```
+Mac                              ICE login node            ICE compute node
+main.py run  --HTTP--> localhost:11434 --ssh -L--> :11434  ollama serve (A100)
+  prompts, grading,                                          gemma3:4b, mistral:7b, ...
+  runs/*.jsonl
+```
+
+The working sequence, which is recorded in full as `docs/PACE-ICE.md` in the repository:
+
+1. Connect GlobalProtect to `vpn.gatech.edu`. PACE hostnames do not resolve off the GT network.
+2. `ssh amohite8@login-ice.pace.gatech.edu`. The login node is for Slurm commands only.
+3. `salloc -p ice-gpu --gres=gpu:a100:1 --cpus-per-task=8 --mem=64G --time=05:00:00`. The shell
+   moves to a compute node whose name changes with every allocation, so nothing hardcodes it.
+4. On the node: `module load ollama/0.12.11`, then
+   `OLLAMA_HOST=0.0.0.0:11434 ollama serve > ~/ollama.log 2>&1 &`, then `ollama pull <tag>`.
+   Binding `0.0.0.0` rather than loopback is what makes the node reachable through the tunnel.
+5. From the Mac: `./scripts/ice-tunnel.sh`, which reads the current node out of `squeue`, opens
+   `ssh -L 11434:<node>:11434`, and curls `/api/tags` through the forward so it reports
+   `tunnel up: ... ollama answering` instead of failing silently.
+6. From the Mac: `BDS_BACKEND=pace-ice-a100 python3 -m src.main run --models mistral-7b ...`.
+
+Two design decisions follow from this arrangement and both matter for the results.
+
+`BDS_BACKEND` is declared rather than inferred. A tunnel makes the two backends
+indistinguishable from the client, since both are `localhost:11434`, so the label is written
+into every trace header by hand. `wall_ms` from an A100 is not `wall_ms` from a fanless
+laptop, which is why accuracy is compared across backends in this report and timings are not.
+
+Sampling settings do not change when the backend does. Everything in `src/utils/config.py`
+stays pinned exactly as it is, including `num_thread: 4`, which is inert on a GPU. Only the
+hardware moves, so the tables stay comparable. `gemma3:4b` was verified to have an identical
+digest (`a2af6cc3eb7fa8be850...`) on both machines before any run mixed them.
+
+Four failure modes cost me time, and each reports something other than its actual cause. The
+login host is `login-ice.pace.gatech.edu`, not `pace-ice...`, and the wrong name produces
+`ssh: Could not resolve hostname`, which reads like a VPN failure. `srun --jobid=... --pty bash`
+hangs forever without `--overlap`, because PACE's `salloc` runs your shell as step 0 and holds
+the whole allocation. An interactive `salloc` job dies with the shell that launched it, taking
+the backgrounded `ollama serve` with it. And model stores are per node, so a new allocation
+usually means a node with nothing pulled. The last of these is why the incomplete Qwen3-32B
+Task-2 CoT cell exists: the tunnel dropped mid-run.
+
+---
+
+<a id="q1"></a>
 
 # Question 1 (Deliverable 1): report each LLM with full name, version, company, parameter count, download URL and default hyperparameters
 
@@ -181,6 +278,8 @@ locally. That is a real gap in my provenance record, and those five are pinned b
 than by digest.
 
 ---
+
+<a id="q2"></a>
 
 # Question 2 (Deliverable 2): result tables for both tasks, 10 queries by 3 LLMs by 2 hyperparameter settings, wrong answers in red
 
@@ -362,6 +461,8 @@ honest but small, and no amount of prompting changes that.
 
 ---
 
+<a id="q3"></a>
+
 # Question 3 (Deliverable 3): compare the 10 queries and the results across all three pretrained LLMs, with observations for each
 
 ## Step 1: Final answer (AI generated)
@@ -534,6 +635,8 @@ tokenisation; and that temperature is not a useful lever for either task between
 All three rest on ten items per task and should be treated as directional.
 
 ---
+
+<a id="q4"></a>
 
 # Question 4 (Deliverable 4): for each LLM, compare the two learning tasks and the in-context phrases designed, with pros, cons and behaviour across the two complexity bands
 
@@ -721,6 +824,8 @@ time went to `fewshot_verbose` on the two largest models instead. Its column is 
 tables above rather than empty, and I would rather report that than pad the grid.
 
 ---
+
+<a id="q5"></a>
 
 # Question 5 (Deliverable 5): critique of the LLM reasoning outputs used for analysis
 
@@ -921,6 +1026,8 @@ opens the raw data is a summary of a summary.
 
 ---
 
+<a id="refs"></a>
+
 # Step 3: References
 
 Handout-provided sources:
@@ -963,13 +1070,16 @@ submission.
 
 ---
 
+<a id="appendix"></a>
+
 # Step 4: Appendices
 
-**A. Project repository and live artefacts.** `https://github.com/moriowen/llm-prompting-lab`
-(private). The interactive page is deployed as a static site on Vercel (project
-`llm-prompting-lab`). It has two panes over one corpus: the write-up, and a trial explorer where
-any query by temperature cell opens the raw responses behind it. Both build to a single
-self-contained file with no server and no CDN.
+**A. Project repository and live artefacts.** The interactive page is live at
+**https://llm-prompting-lab.vercel.app/**. It has two panes over one corpus: the analysis
+write-up, and a trial explorer where any query by temperature cell opens the raw responses
+behind it. Everything builds to a single self-contained file with no server and no CDN, and the
+numbers in the write-up pane are resolved from the committed run files at build time. Source is
+at `https://github.com/moriowen/llm-prompting-lab` (private).
 
 **B. Reproduction.**
 
