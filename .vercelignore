@@ -1,0 +1,15 @@
+# Only public/ is ever deployed. outputDirectory in vercel.json already scopes what is
+# served; this stops everything else being uploaded at all, so the traces, the harness
+# and the notes cannot be reached even by a misconfiguration.
+/runs
+/src
+/scripts
+/data
+/docs
+/tmp
+/*.md
+/*.pdf
+/ui.html
+/report.html
+/pyproject.toml
+/.python-version
