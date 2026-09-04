@@ -46,11 +46,22 @@ def grade_task1(item: dict, raw: str, arm: str) -> dict:
     valid_norm = len(normalized) == length
     correct_norm = normalized == gold
 
+    # Nothing survived normalisation, so the completion carried no answer at all. The
+    # ["\n"] stop these arms use fires on a preamble and cuts the response before the
+    # answer is emitted, leaving prose that strips to "" ("To reverse the string
+    # **VAYCXPhA** ... follow these steps:"). That is a harness failure of the same kind
+    # as a missing FINAL: marker -- section 4.7's rule that a cut-off response is our bug
+    # rather than their answer -- so it is excluded from the denominator instead of
+    # scored as wrong. Seen on llama3.1-8b task1 fewshot (235/330) and, from prompt
+    # wording alone with sampling, shots and seeds all pinned identical, on qwen3-32b
+    # task1 fewshot_verbose (47/330).
+    answered = bool(normalized)
+
     if not ok:
         error = "extraction_failed"
     elif correct:
         error = "none"
-    elif not extracted:
+    elif not answered:
         error = "empty"
     elif correct_norm:
         error = "extra_text"
@@ -64,7 +75,9 @@ def grade_task1(item: dict, raw: str, arm: str) -> dict:
     return {"valid": valid, "correct": correct, "valid_norm": valid_norm,
             "correct_norm": correct_norm, "error_type": error,
             "extracted": extracted, "normalized": normalized,
-            "extraction_ok": ok, "gold": gold}
+            # error_type keeps the specific label ("empty"); extraction_ok is what
+            # experiment.py turns into `invalid`, so both facts survive.
+            "extraction_ok": ok and answered, "gold": gold}
 
 
 # --- task 2 ---------------------------------------------------------------------------
@@ -100,6 +113,9 @@ def grade_task2(item: dict, raw: str, arm: str) -> dict:
 
     correct = extracted == gold
     correct_norm = value is not None and value == Decimal(gold)
+    # No number anywhere in the completion: same truncation signature as task 1, where
+    # the stop cuts a preamble before the answer. 9/330 of llama3.1-8b task2 fewshot.
+    answered = value is not None
 
     if not ok:
         error = "extraction_failed"
@@ -131,7 +147,7 @@ def grade_task2(item: dict, raw: str, arm: str) -> dict:
     return {"valid": value is not None, "correct": correct,
             "valid_norm": value is not None, "correct_norm": correct_norm,
             "error_type": error, "extracted": extracted,
-            "normalized": token or "", "extraction_ok": ok, "gold": gold}
+            "normalized": token or "", "extraction_ok": ok and answered, "gold": gold}
 
 
 def grade(task: str, item: dict, raw: str, arm: str) -> dict:
