@@ -90,6 +90,23 @@ MODEL_REGISTRY = {
         "digest": None,
         "local": False,
     },
+    # Largest model that fits the 40 GB A100 at Q4_K_M (19.9 GB of weights). Note this is
+    # qwen3, a later generation than the two qwen2.5 entries above, so it extends the
+    # vendor line but not the clean within-family size curve 1.5b -> 7b. It is also a
+    # hybrid reasoning model: it emits a thinking block unless that is switched off, which
+    # the newline stop in config.STOP would truncate into an empty answer.
+    "qwen3-32b": {
+        "slot": "supp-scale-xl",
+        "ollama_tag": "qwen3:32b",
+        "full_name": "Qwen3 32B",
+        "org": "Alibaba Cloud (Qwen team)",
+        "params": "32.8B",
+        "quantization": "Q4_K_M",
+        "url": "https://huggingface.co/Qwen/Qwen3-32B",
+        "ollama_url": "https://ollama.com/library/qwen3:32b",
+        "digest": None,
+        "local": False,
+    },
 }
 
 # The three that go in the six-column tables. Ordered small -> large.
