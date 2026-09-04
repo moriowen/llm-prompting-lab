@@ -220,7 +220,7 @@ def main(argv=None):
     tk.set_defaults(fn=cmd_tokens)
 
     ui = sub.add_parser("ui", help="build the interactive run explorer")
-    ui.add_argument("--out", default="ui.html")
+    ui.add_argument("--out", default="public/index.html")
     ui.add_argument("--serve", action="store_true", help="live mode: reread runs/ on every request")
     ui.add_argument("--port", type=int, default=8765)
     ui.set_defaults(fn=cmd_ui)

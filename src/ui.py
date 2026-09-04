@@ -3,7 +3,7 @@
 import json
 from pathlib import Path
 
-from src import generate
+from src import generate, writeup
 from src.utils import trace
 from src.utils.constants import MODEL_REGISTRY, TASK_NAMES
 
@@ -13,9 +13,8 @@ from src.utils.constants import MODEL_REGISTRY, TASK_NAMES
 RAW_CHARS = 600
 
 
-def collect() -> dict:
+def collect(trials: list[dict]) -> dict:
     """Everything the page needs, with short keys because this is embedded verbatim."""
-    _, trials = trace.load_all()
     # The ladder reuses qids for different queries, so it cannot share a key with the
     # main set. Treating it as its own "task" keeps every downstream view -- bands,
     # curves, grid, inspector -- working unchanged, with the ladder lengths as bands.
@@ -45,7 +44,7 @@ def collect() -> dict:
         rows.append({
             "m": t["model"], "k": key, "a": t["arm"], "T": t["temperature"],
             "q": t["qid"], "s": t["seed"], "o": t.get("normalized", ""),
-            "c": int(bool(t.get("correct_norm"))), "cs": int(bool(t.get("correct"))),
+            "c": int(bool(t.get("correct_norm"))),
             "e": t.get("error_type", ""), "v": int(bool(t.get("invalid"))),
             "r": raw[:RAW_CHARS] + ("…" if len(raw) > RAW_CHARS else ""),
         })
@@ -63,7 +62,7 @@ def collect() -> dict:
 
 PAGE = r"""<!doctype html><html><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>HW1 run explorer</title><style>
+<title>Reversal and division: seven open-weight models</title><style>
 :root{--bg:#fff;--fg:#1a1a1a;--muted:#777;--line:#e0e0e0;--head:#f6f6f6;--bad:#c62828;--ok:#1b7f5a;--accent:#37c}
 @media (prefers-color-scheme:dark){:root{--bg:#141414;--fg:#e9e9e9;--muted:#8d8d8d;--line:#2e2e2e;--head:#1c1c1c;--bad:#ff6b6b;--ok:#3ddc97;--accent:#6aa9ff}}
 *{box-sizing:border-box}
@@ -107,17 +106,61 @@ pre{margin:.35rem 0 0;white-space:pre-wrap;word-break:break-word;font-size:11.5p
 .tax b{font-variant-numeric:tabular-nums}
 svg{max-width:100%;height:auto;overflow:visible}
 .empty{color:var(--muted);padding:2rem 0}
+.head{display:flex;flex-wrap:wrap;gap:1rem;align-items:flex-end;justify-content:space-between;
+ max-width:1200px;margin:0 auto}
+.views{display:flex;gap:.4rem}
+.views button{cursor:pointer;padding:.34rem .8rem}
+
+/* --- write-up. Scoped so none of it reaches the explorer, which stays as it was. --- */
+#doc{max-width:62rem;margin:0 auto;font-size:15px;line-height:1.62}
+#doc p,#doc ol,#doc ul,#doc dl,#doc h3,#doc h4,#doc .note{max-width:47rem}
+#doc h2{font-size:1.35rem;margin:2.8rem 0 .9rem;padding-bottom:.35rem;border-bottom:1px solid var(--line)}
+#doc section:first-child h2{margin-top:1.4rem}
+#doc h3{font-size:1.02rem;margin:0 0 .7rem;line-height:1.4;display:flex;gap:.6rem;align-items:baseline}
+#doc h4{font-size:.88rem;margin:1.4rem 0 .4rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+#doc p{margin:0 0 .85rem}
+#doc li{margin-bottom:.55rem}
+#doc code{font-family:ui-monospace,Menlo,monospace;font-size:.86em;background:var(--head);
+ padding:.05rem .3rem;border-radius:4px}
+#doc dl{margin:0}
+#doc dt{font-weight:600;margin-top:1.1rem}
+#doc dd{margin:.25rem 0 0;color:var(--muted)}
+#doc a{color:var(--accent)}
+.finding{border-top:1px solid var(--line);padding-top:1.4rem;margin-top:1.8rem}
+.finding:first-of-type{border-top:0}
+.fnum{flex:none;width:1.5rem;height:1.5rem;border-radius:50%;background:var(--fg);color:var(--bg);
+ font-size:.78rem;display:inline-flex;align-items:center;justify-content:center}
+.toc{display:flex;flex-direction:column;gap:.15rem;margin:0 0 .5rem;padding:.8rem 1rem;
+ background:var(--head);border:1px solid var(--line);border-radius:8px;font-size:.87rem}
+.toc a{text-decoration:none}
+.toc a:hover{text-decoration:underline}
+#doc .scroll{margin:1rem 0}
+#doc table{width:100%}
+#doc th,#doc td{text-align:left}
+#doc td.num,#doc th.num,#doc .num{text-align:right;font-variant-numeric:tabular-nums}
+#doc .sub2{display:block;font-size:10px;color:var(--muted);font-variant-numeric:tabular-nums}
+#doc .na{color:var(--muted);opacity:.6}
+#doc .lead{font-weight:700}
+#doc .spark{width:132px;height:26px;display:block}
+#doc th.rot{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;font-weight:500}
+#doc .note{border-left:3px solid var(--line);padding:.15rem 0 .15rem .9rem;color:var(--muted);
+ font-size:.9rem;margin-top:1.6rem}
 </style></head><body>
-<header><h1>HW1 run explorer</h1>
-<div class="sub" id="sub"></div></header>
+<header><div class="head">
+  <div><h1>Two exactly-computable tasks, seven open-weight models</h1>
+  <div class="sub" id="sub"></div></div>
+  <nav class="views">
+    <button class="tab" id="vd" aria-pressed="true">Findings</button>
+    <button class="tab" id="ve" aria-pressed="false">Explorer</button>
+  </nav>
+</div></header>
 <main>
+<article id="doc">__DOC__</article>
+<div id="exp" hidden>
 <div class="bar">
   <label>model</label><select id="m"></select>
   <label>task</label><select id="k"></select>
   <label>arm</label><select id="a"></select>
-  <label>grading</label>
-  <button class="tab" id="gn" aria-pressed="true">normalised</button>
-  <button class="tab" id="gs" aria-pressed="false">strict</button>
 </div>
 <div class="stats" id="stats"></div>
 <h2>Accuracy and self-consistency across temperature</h2>
@@ -129,12 +172,13 @@ svg{max-width:100%;height:auto;overflow:visible}
 <div id="panel"><h3>Click a cell to inspect its draws</h3></div>
 <h2>Error taxonomy</h2>
 <div class="tax" id="tax"></div>
+</div>
 </main>
 <script id="data" type="application/json">__DATA__</script>
 <script>
 const D = JSON.parse(document.getElementById('data').textContent);
 const $ = id => document.getElementById(id);
-let normalised = true, sel = null;
+let sel = null, pane = 'doc';
 
 const uniq = (f) => [...new Set(D.trials.map(f))];
 const temps = uniq(t => t.T).sort((a, b) => a - b);
@@ -144,7 +188,7 @@ const KEY = 'hw1-ui-state';
 // Anything no longer present in the data is dropped rather than restored blindly.
 function save() {
   try { sessionStorage.setItem(KEY, JSON.stringify(
-    {m: $('m').value, k: $('k').value, a: $('a').value, n: normalised, sel})); } catch (e) {}
+    {m: $('m').value, k: $('k').value, a: $('a').value, sel, v: pane})); } catch (e) {}
 }
 function restore() {
   let s = null;
@@ -152,9 +196,8 @@ function restore() {
   if (!s) return;
   ['m', 'k', 'a'].forEach(id => { $(id).value = s[id]; });
   options();  // drops anything the restored model no longer offers
-  normalised = s.n !== false;
-  $('gn').ariaPressed = String(normalised); $('gs').ariaPressed = String(!normalised);
   if (s.sel && (D.queries[$('k').value] || {})[s.sel.split('|')[0]]) sel = s.sel;
+  if (s.v === 'doc' || s.v === 'exp') pane = s.v;
 }
 
 function fill(el, values, counts, labels) {
@@ -190,7 +233,7 @@ function options() {
 }
 options();
 
-const ok = t => (normalised ? t.c : t.cs) === 1;
+const ok = t => t.c === 1;
 function view() {
   return D.trials.filter(t => t.m === $('m').value && t.k === $('k').value && t.a === $('a').value);
 }
@@ -213,7 +256,7 @@ function stats() {
   const rows = view(), v = valid(rows);
   const cells = [
     ['trials', rows.length], ['valid', v.length],
-    ['accuracy', (accuracy(rows) * 100).toFixed(1) + '%'],
+    ['normalised accuracy', (accuracy(rows) * 100).toFixed(1) + '%'],
     ['self-consistency', (consistency(rows) * 100).toFixed(1) + '%'],
     ['invalid', rows.length - v.length],
     ['temperatures', new Set(rows.map(t => t.T)).size],
@@ -316,26 +359,46 @@ function render() {
   stats(); chart(); grid(); panel(); tax(); save();
 }
 ['m', 'k', 'a'].forEach(id => $(id).onchange = () => { sel = null; options(); render(); });
-$('gn').onclick = () => { normalised = true; $('gn').ariaPressed = 'true'; $('gs').ariaPressed = 'false'; render(); };
-$('gs').onclick = () => { normalised = false; $('gs').ariaPressed = 'true'; $('gn').ariaPressed = 'false'; render(); };
+// Two surfaces over one corpus: the standing analysis, and the explorer that lets you
+// read the individual responses behind any number in it. The chosen view is saved with
+// the filters, so a reload comes back where you were rather than at the top.
+function setPane(v) {
+  pane = v;
+  $('doc').hidden = v !== 'doc';
+  $('exp').hidden = v !== 'exp';
+  $('vd').ariaPressed = String(v === 'doc');
+  $('ve').ariaPressed = String(v === 'exp');
+  save();
+}
+$('vd').onclick = () => setPane('doc');
+$('ve').onclick = () => setPane('exp');
+// A link out of the write-up into a specific cell of the explorer would otherwise land
+// on a hidden element.
+document.querySelectorAll('#doc a[href^="#exp-"]').forEach(a =>
+  a.onclick = () => setPane('exp'));
+
 restore();
-$('sub').textContent = `${D.trials.length} graded trials · ${uniq(t => t.m).length} model(s) · `
-  + `${temps.length} temperatures · each selector shows its trial count, and only `
-  + `combinations that have data`;
+$('sub').textContent = `${D.trials.length} graded trials · ${uniq(t => t.m).length} models · `
+  + `${temps.length} temperatures · ${uniq(t => t.a).length} prompting arms`;
+setPane(pane);
 render();
 </script></body></html>"""
 
 
 def render() -> str:
     """The page as a string, with the current runs embedded."""
+    # One read of runs/ feeds both surfaces, so the prose and the explorer can never
+    # be describing different corpora.
+    _, trials = trace.load_all()
     # </script> inside a raw response would close the data block early.
-    payload = json.dumps(collect(), separators=(",", ":")).replace("</", "<\\/")
-    return PAGE.replace("__DATA__", payload)
+    payload = json.dumps(collect(trials), separators=(",", ":")).replace("</", "<\\/")
+    return PAGE.replace("__DOC__", writeup.render(trials)).replace("__DATA__", payload)
 
 
-def build(out_path="ui.html") -> Path:
-    """Write the explorer with its data embedded."""
+def build(out_path="public/index.html") -> Path:
+    """Write the page with its data embedded. Defaults into the directory Vercel serves."""
     path = Path(out_path)
+    path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(render())
     return path
 
