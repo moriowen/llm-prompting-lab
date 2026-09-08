@@ -10,3 +10,4 @@ H1-assignment-transcript.md
 # local build output; the deployed copy is public/index.html
 ui.html
 .vercel
+.claude/worktrees/
